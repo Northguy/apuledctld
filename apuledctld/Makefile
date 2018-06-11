@@ -1,11 +1,12 @@
-CC=g++
+CC=c++
 #CFLAGS=-s -O2 -Wno-write-strings
 CFLAGS=-g -Wall -Wextra -Werror -Wno-write-strings
 CDFLAGS=-g -Wall -Wextra -Werror -Wno-write-strings -D__DEBUG_
 PROG=apuledctld
 LIB=
+OBJS=
 
-all: $(PROG)
+all: $(OBJS) $(PROG)
 
 %: %.cpp
 	$(CC) $(CFLAGS) -o $@ $< $(LIB)
