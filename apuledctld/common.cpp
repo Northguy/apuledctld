@@ -13,6 +13,8 @@ int check_apuled_module()
     
     fid=kldfind("apuled");
     if(fid<0) return -1;
+    memset(&st,0,sizeof(kld_file_stat));
+    st.version=sizeof(kld_file_stat);
     if(kldstat(fid,&st)) return -1;
     return 0; //Module loaded
 }
