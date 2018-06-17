@@ -8,7 +8,7 @@ OBJS=common.o
 
 all: $(OBJS) $(PROG)
 
-$(PROG): apuledctld.h
+$(PROG): $(OBJS) apuledctld.h
 $(OBJS): apuledctld.h
 
 .cpp.o:
