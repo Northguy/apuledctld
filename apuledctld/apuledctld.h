@@ -15,5 +15,6 @@ int check_apuled_devs();
 
 //log
 void log(int lev,char* args,...);
+void elog(int lev,char* args,...);
 
 #endif /*__APULEDCTLD_H_*/
