@@ -7,7 +7,13 @@
 #define APU_LED3 "/dev/led/led3"
 #define APU_MODESW "/dev/modesw"
 
+#define LOG_FILE "/var/log/apuledctld.log"
+
+//common
 int check_apuled_module();
 int check_apuled_devs();
+
+//log
+void log(int lev,char* args,...);
 
 #endif /*__APULEDCTLD_H_*/

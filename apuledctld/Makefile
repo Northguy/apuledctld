@@ -4,7 +4,7 @@ CFLAGS=-g -Wall -Wextra -Werror -Wno-write-strings
 CDFLAGS=-g -Wall -Wextra -Werror -Wno-write-strings -D__DEBUG_
 PROG=apuledctld
 LIB=
-OBJS=common.o
+OBJS=common.o log.o
 
 all: $(OBJS) $(PROG)
 
