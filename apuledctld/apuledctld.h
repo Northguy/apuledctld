@@ -52,4 +52,7 @@ void watch_modesw();
 int load_conf();
 int load_scheme(char* str);
 
+//led
+void reset_leds();
+
 #endif /*__APULEDCTLD_H_*/
