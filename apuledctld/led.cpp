@@ -23,3 +23,13 @@ void reset_leds()
 	fclose(f);
     }
 }
+
+void set_led(char* name,char* buf)
+{
+    FILE* f;
+
+    f=fopen(name,"a");
+    if(!f) return;
+    fprintf(f,"%s",buf);
+    fclose(f);
+}

@@ -54,5 +54,6 @@ int load_scheme(char* str);
 
 //led
 void reset_leds();
+void set_led(char* name,char* buf);
 
 #endif /*__APULEDCTLD_H_*/
