@@ -44,6 +44,7 @@ struct conf
 };
 
 extern bool run;
+extern conf cf;
 
 //common
 int check_apuled_module();
@@ -64,5 +65,6 @@ int load_scheme(char* str);
 void reset_leds();
 void set_led(char* name,char* buf);
 void set_leds(uint8_t bm);
+void blink_leds(blink_scheme* bs);
 
 #endif /*__APULEDCTLD_H_*/

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <errno.h>
+#include <sys/select.h>
 
 #include "apuledctld.h"
 
@@ -51,4 +52,22 @@ void set_leds(uint8_t bm)
     if(LED3_ON(bm)) buf[0]='1';
     else buf[0]='0';
     set_led(APU_LED3,buf);
+}
+
+void blink_leds(blink_scheme* bs)
+{
+    blink* b;
+    timeval tv;
+
+    reset_leds();
+    for(unsigned long i=0;;i++)
+    {
+	if(i>=bs->b.size()) i=0;
+	b=bs->b[i];
+	set_leds(b->leds);
+	if(bs->b.size()==1) break;
+	tv.tv_sec=0;
+	tv.tv_usec=b->delay*1000;
+	select(0,NULL,NULL,NULL,&tv);
+    }
 }
