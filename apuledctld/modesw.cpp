@@ -29,7 +29,7 @@ void watch_modesw()
 	    elog(0,"Can't read from %s: %d (%s)\n",APU_MODESW,errno,strerror(errno));
 	    break;
 	}
-	if(data)
+	if(data!='0')
 	{
 	    //Button pressed
 	    if(bpt<BTN_WAIT)
@@ -41,6 +41,7 @@ void watch_modesw()
 	    {
 		//Run action
 		elog(1,"Running action\n");
+		break;
 	    }
 	}
 	else bpt=0; //Reset press timer
