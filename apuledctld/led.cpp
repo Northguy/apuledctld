@@ -33,3 +33,22 @@ void set_led(char* name,char* buf)
     fprintf(f,"%s",buf);
     fclose(f);
 }
+
+void set_leds(uint8_t bm)
+{
+    char buf[2];
+
+    buf[1]=0;
+    //1
+    if(LED1_ON(bm)) buf[0]='1';
+    else buf[0]='0';
+    set_led(APU_LED1,buf);
+    //2
+    if(LED2_ON(bm)) buf[0]='1';
+    else buf[0]='0';
+    set_led(APU_LED2,buf);
+    //3
+    if(LED3_ON(bm)) buf[0]='1';
+    else buf[0]='0';
+    set_led(APU_LED3,buf);
+}

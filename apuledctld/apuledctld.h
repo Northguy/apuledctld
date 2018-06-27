@@ -9,6 +9,14 @@
 #define APU_LED3 "/dev/led/led3"
 #define APU_MODESW "/dev/modesw"
 
+#define LED1 0x1
+#define LED2 0x2
+#define LED3 0x4
+
+#define LED1_ON(bm) ((bm) & LED1)
+#define LED2_ON(bm) ((bm) & LED2)
+#define LED3_ON(bm) ((bm) & LED3)
+
 #define BTN_WAIT 5 //In seconds, wait time before run action when button pressed
 
 #define LOG_FILE "/var/log/apuledctld.log"
@@ -55,5 +63,6 @@ int load_scheme(char* str);
 //led
 void reset_leds();
 void set_led(char* name,char* buf);
+void set_leds(uint8_t bm);
 
 #endif /*__APULEDCTLD_H_*/
