@@ -49,7 +49,7 @@ struct conf
 
 extern bool run;
 extern conf cf;
-extern blink_scheme* __cs; //Current blink scheme
+extern int __cs; //Current blink scheme
 extern pthread_t __led_tid;
 
 //common
@@ -77,6 +77,6 @@ void reset_leds();
 void set_led(char* name,char* buf);
 void set_leds(uint8_t bm);
 void blink_leds(blink_scheme* bs);
-blink_scheme* get_blink_scheme(char* name);
+int get_blink_scheme(char* name);
 
 #endif /*__APULEDCTLD_H_*/

@@ -58,11 +58,12 @@ int run_leds()
     pthread_t tid;
     int r;
 
-    if(__cs->b.size()==1)
+    if((int)__cs<0 || __cs>(int)(cf.bs.size()-1)) return EINVAL;
+    if(cf.bs[__cs]->b.size()==1)
     {
 	//Static scheme
 	__led_tid=NULL;
-	blink_leds(__cs);
+	blink_leds(cf.bs[__cs]);
 	return 0;
     }
     //Dynamic scheme
@@ -79,7 +80,7 @@ int run_leds()
 void* led_thread(void* ptr)
 {
     UNUSED(ptr);
-    blink_leds(__cs);
+    blink_leds(cf.bs[__cs]);
     return NULL;
 }
 

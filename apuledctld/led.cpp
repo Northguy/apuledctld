@@ -5,7 +5,7 @@
 
 #include "apuledctld.h"
 
-blink_scheme* __cs=NULL; //Current blink scheme
+int __cs=-1; //Current blink scheme
 
 void reset_leds()
 {
@@ -74,12 +74,12 @@ void blink_leds(blink_scheme* bs)
     }
 }
 
-blink_scheme* get_blink_scheme(char* name)
+int get_blink_scheme(char* name)
 {
     for(unsigned long i=0;i<cf.bs.size();i++)
     {
-	if(!cf.bs[i]) return NULL;
-	if(!strcmp(cf.bs[i]->name,name)) return cf.bs[i];
+	if(!cf.bs[i]) return -1;
+	if(!strcmp(cf.bs[i]->name,name)) return i;
     }
-    return NULL;
+    return -1;
 }

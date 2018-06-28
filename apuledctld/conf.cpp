@@ -11,6 +11,7 @@ int load_conf()
     FILE* f;
     char str[1024];
     char* p;
+    int r;
     
     cf.btn_wait=0;
     memset(cf.action,0,1024);
@@ -43,9 +44,10 @@ _err:
     }
     fclose(f);
     if(!cf.btn_wait || !strlen(cf.action) || cf.bs.size()<2) goto _err;
-    if(!get_blink_scheme("startup")) goto _err;
-    if(!get_blink_scheme("running")) goto _err;
-    __cs=cf.bs[0];
+    if(get_blink_scheme("startup")<0) goto _err;
+    r=get_blink_scheme("running");
+    if(r<0) goto _err;
+    __cs=r;
     return 0;
 }
 
