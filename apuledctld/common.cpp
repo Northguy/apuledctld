@@ -92,6 +92,7 @@ void sigproc(int sig)
 	break;
 
 	case SIGTERM:
+	case SIGINT:
 	run=false;
 	break;
 
