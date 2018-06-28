@@ -9,6 +9,8 @@
 
 #include "apuledctld.h"
 
+pthread_t __led_tid=0;
+
 int check_apuled_module()
 {
     int fid; //File id
@@ -49,4 +51,34 @@ _serr:
     if(stat(APU_MODESW,&st)) return -1;
     if(!S_ISCHR(st.st_mode)) return -1;
     return 0;
+}
+
+int run_leds()
+{
+    pthread_t tid;
+    int r;
+
+    if(__cs->b.size()==1)
+    {
+	//Static scheme
+	__led_tid=0;
+	blink_leds(__cs);
+	return 0;
+    }
+    //Dynamic scheme
+    r=pthread_create(&tid,NULL,led_thread,NULL);
+    if(r)
+    {
+	__led_tid=0;
+	return r;
+    }
+    __led_tid=tid;
+    return 0;
+}
+
+void* led_thread(void* ptr)
+{
+    UNUSED(ptr);
+    blink_leds(__cs);
+    return NULL;
 }

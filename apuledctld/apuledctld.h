@@ -2,6 +2,9 @@
 #define __APULEDCTLD_H_
 
 #include <vector>
+#include <pthread.h>
+
+#define UNUSED(x) (void)(x)
 
 #define SYSCTL_APULED_DESC "dev.apuled.0.%desc"
 #define APU_LED1 "/dev/led/led1"
@@ -46,10 +49,13 @@ struct conf
 extern bool run;
 extern conf cf;
 extern blink_scheme* __cs; //Current blink scheme
+extern pthread_t __led_tid;
 
 //common
 int check_apuled_module();
 int check_apuled_devs();
+int run_leds();
+void* led_thread(void* ptr);
 
 //log
 void log(int lev,char* args,...);
