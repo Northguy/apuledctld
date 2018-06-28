@@ -9,7 +9,7 @@
 
 #include "apuledctld.h"
 
-pthread_t __led_tid=0;
+pthread_t __led_tid=NULL;
 
 int check_apuled_module()
 {
@@ -61,7 +61,7 @@ int run_leds()
     if(__cs->b.size()==1)
     {
 	//Static scheme
-	__led_tid=0;
+	__led_tid=NULL;
 	blink_leds(__cs);
 	return 0;
     }
@@ -69,7 +69,7 @@ int run_leds()
     r=pthread_create(&tid,NULL,led_thread,NULL);
     if(r)
     {
-	__led_tid=0;
+	__led_tid=NULL;
 	return r;
     }
     __led_tid=tid;
