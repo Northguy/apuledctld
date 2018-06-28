@@ -100,3 +100,15 @@ void sigproc(int sig)
 	break;
     }
 }
+
+void switch_scheme()
+{
+    if(__cs>(int)(cf.bs.size()-1)) __cs=0;
+    else __cs++;
+    if(__led_tid)
+    {
+	if(pthread_cancel(__led_tid)) return;
+	__led_tid=0;
+    }
+    run_leds();
+}
