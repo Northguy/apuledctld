@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <pthread.h>
+#include <signal.h>
 
 #define UNUSED(x) (void)(x)
 
@@ -56,6 +57,7 @@ int check_apuled_module();
 int check_apuled_devs();
 int run_leds();
 void* led_thread(void* ptr);
+void sigproc(int sig);
 
 //log
 void log(int lev,char* args,...);

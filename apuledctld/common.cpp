@@ -82,3 +82,19 @@ void* led_thread(void* ptr)
     blink_leds(__cs);
     return NULL;
 }
+
+void sigproc(int sig)
+{
+    switch(sig)
+    {
+	case SIGHUP:
+	break;
+
+	case SIGTERM:
+	run=false;
+	break;
+
+	default:
+	break;
+    }
+}
