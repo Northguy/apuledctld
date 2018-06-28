@@ -5,6 +5,8 @@
 
 #include "apuledctld.h"
 
+blink_scheme* __cs=NULL; //Current blink scheme
+
 void reset_leds()
 {
     char* Leds[]=
@@ -70,4 +72,14 @@ void blink_leds(blink_scheme* bs)
 	tv.tv_usec=b->delay*1000;
 	select(0,NULL,NULL,NULL,&tv);
     }
+}
+
+blink_scheme* get_blink_scheme(char* name)
+{
+    for(unsigned long i=0;i<cf.bs.size();i++)
+    {
+	if(!cf.bs[i]) return NULL;
+	if(!strcmp(cf.bs[i]->name,name)) return cf.bs[i];
+    }
+    return NULL;
 }
