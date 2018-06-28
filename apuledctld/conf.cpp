@@ -43,6 +43,9 @@ _err:
     }
     fclose(f);
     if(!cf.btn_wait || !strlen(cf.action) || cf.bs.size()<2) goto _err;
+    if(!get_blink_scheme("startup")) goto _err;
+    if(!get_blink_scheme("running")) goto _err;
+    __cs=cf.bs[0];
     return 0;
 }
 
