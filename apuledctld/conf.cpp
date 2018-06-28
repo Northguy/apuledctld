@@ -36,12 +36,13 @@ int load_conf()
 	    {
 _err:
 		fclose(f);
+		clear_conf();
 		return EINVAL;
 	    }
 	}
     }
     fclose(f);
-    if(!cf.btn_wait || !strlen(cf.action) || !cf.bs.size()) return EINVAL;
+    if(!cf.btn_wait || !strlen(cf.action) || cf.bs.size()<2) goto _err;
     return 0;
 }
 
@@ -71,6 +72,7 @@ int load_scheme(char* str)
 	if(bm<0) 
 	{ 
 _err:	
+	    delete bs;
 	    delete b;
 	    return EINVAL; 
 	}
@@ -84,4 +86,24 @@ _err:
     }
     cf.bs.push_back(bs);
     return 0;
+}
+
+void clear_scheme(blink_scheme* bs)
+{
+    for(unsigned long i=0;i<bs->b.size();i++)
+    {
+     if(!bs->b[i]) break;
+     delete bs->b[i];
+    }
+    bs->b.clear();
+}
+
+void clear_conf()
+{
+    for(unsigned long i=0;i<cf.bs.size();i++)
+    {
+     if(!cf.bs[i]) break;
+     clear_scheme(cf.bs[i]);
+    }
+    cf.bs.clear();
 }

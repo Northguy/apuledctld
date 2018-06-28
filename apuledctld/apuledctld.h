@@ -60,6 +60,8 @@ void watch_modesw();
 //conf
 int load_conf();
 int load_scheme(char* str);
+void clear_scheme(blink_scheme* bs);
+void clear_conf();
 
 //led
 void reset_leds();
