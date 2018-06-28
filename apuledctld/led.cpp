@@ -20,7 +20,7 @@ void reset_leds()
     
     for(int i=0;i<3;i++)
     {
-	f=fopen(Leds[i],"r");
+	f=fopen(Leds[i],"a");
 	if(!f) return;
 	fprintf(f,"0");
 	fclose(f);
