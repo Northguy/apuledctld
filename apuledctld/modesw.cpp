@@ -41,6 +41,7 @@ void watch_modesw()
 	    {
 		//Run action
 		elog(1,"Running action\n");
+		system(cf.action);
 		break;
 	    }
 	}
