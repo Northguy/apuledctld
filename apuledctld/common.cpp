@@ -89,6 +89,7 @@ void sigproc(int sig)
     switch(sig)
     {
 	case SIGHUP:
+	switch_scheme();
 	break;
 
 	case SIGTERM:
@@ -103,8 +104,9 @@ void sigproc(int sig)
 
 void switch_scheme()
 {
+    __cs++;
     if(__cs>(int)(cf.bs.size()-1)) __cs=0;
-    else __cs++;
+    elog(1,"Switching to scheme '%s'\n",cf.bs[__cs]->name);
     if(__led_tid)
     {
 	if(pthread_cancel(__led_tid)) return;
