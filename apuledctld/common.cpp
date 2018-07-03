@@ -89,12 +89,23 @@ void sigproc(int sig)
     switch(sig)
     {
 	case SIGHUP:
+	elog(1,"Received SIGHUP, reading scheme name from file...\n");
 	switch_scheme();
 	break;
 
 	case SIGTERM:
 	case SIGINT:
+	elog(1,"Received ");
+	if(sig == SIGINT) log(1," SIGINT.\n");
+	else log(1," SIGTERM.\n");
 	run=false;
+	break;
+
+	case SIGUSR1:
+
+	break;
+
+	case SIGUSR2:
 	break;
 
 	default:
