@@ -51,6 +51,7 @@ extern bool run;
 extern conf cf;
 extern int __cs; //Current blink scheme
 extern pthread_t __led_tid;
+extern int __log_level_;
 
 //common
 int check_apuled_module();
