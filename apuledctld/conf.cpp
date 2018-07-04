@@ -42,12 +42,13 @@ _err:
 	    }
 	}
     }
-    fclose(f);
-    if(!cf.btn_wait || !strlen(cf.action) || cf.bs.size()<2) goto _err;
+    if(!cf.btn_wait || !strlen(cf.action) || cf.bs.size()<3) goto _err;
     if(get_blink_scheme("startup")<0) goto _err;
     r=get_blink_scheme("running");
     if(r<0) goto _err;
+    if(get_blink_scheme("press")<0) goto _err;
     __cs=r;
+    fclose(f);
     return 0;
 }
 
