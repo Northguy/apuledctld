@@ -60,6 +60,7 @@ int run_leds();
 void* led_thread(void* ptr);
 void sigproc(int sig);
 void switch_scheme();
+void change_scheme(char* name);
 
 //log
 void log(int lev,char* args,...);

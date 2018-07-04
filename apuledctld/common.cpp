@@ -125,3 +125,22 @@ void switch_scheme()
     }
     run_leds();
 }
+
+void change_scheme(char* name)
+{
+    int r;
+
+    r=get_blink_scheme(name);
+    if(r<0)
+    {
+	elog(1,"Can't change scheme to '%s', not found\n",name);
+	return;
+    }
+    if(__led_tid)
+    {
+	if(pthread_cancel(__led_tid)) return;
+	__led_tid=NULL;
+    }
+    __cs=r;
+    run_leds();
+}
