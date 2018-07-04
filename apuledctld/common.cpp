@@ -121,7 +121,7 @@ void switch_scheme()
     if(__led_tid)
     {
 	if(pthread_cancel(__led_tid)) return;
-	__led_tid=0;
+	__led_tid=NULL;
     }
     run_leds();
 }
