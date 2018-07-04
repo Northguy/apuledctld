@@ -110,6 +110,7 @@ void clear_conf()
     {
      if(!cf.bs[i]) break;
      clear_scheme(cf.bs[i]);
+     delete cf.bs[i];
     }
     cf.bs.clear();
 }
