@@ -83,3 +83,22 @@ int get_blink_scheme(char* name)
     }
     return -1;
 }
+
+char* get_scheme_from_file()
+{
+    static char result[256];
+    FILE* f;
+
+    memset(result,0,256);
+    f=fopen(SCHEME_FILE,"r");
+    if(!f) return NULL;
+    if(!fgets(result,256,f))
+    {
+	fclose(f);
+	return NULL;
+    }
+    fclose(f);
+    if(!strlen(result)) return NULL;
+    if(result[strlen(result)-1]=='\n') result[strlen(result)-1]=0;
+    return (char*)&result;
+}

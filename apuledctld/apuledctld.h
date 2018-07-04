@@ -25,6 +25,7 @@
 
 #define LOG_FILE "/var/log/apuledctld.log"
 #define CONF_FILE "/usr/local/etc/apuledctld.conf"
+#define SCHEME_FILE "/var/run/apuled-scheme"
 
 using namespace std;
 
@@ -81,5 +82,6 @@ void set_led(char* name,char* buf);
 void set_leds(uint8_t bm);
 void blink_leds(blink_scheme* bs);
 int get_blink_scheme(char* name);
+char* get_scheme_from_file();
 
 #endif /*__APULEDCTLD_H_*/
