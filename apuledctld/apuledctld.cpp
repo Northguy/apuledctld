@@ -67,6 +67,8 @@ _serr:
     }
     if(signal(SIGHUP,sigproc)==SIG_ERR) goto _serr;
     if(signal(SIGTERM,sigproc)==SIG_ERR) goto _serr;
+    if(signal(SIGUSR1,sigproc)==SIG_ERR) goto _serr;
+    if(signal(SIGUSR2,sigproc)==SIG_ERR) goto _serr;
     elog(1,"apuledctld started.\n");
     r=run_leds();
     if(r)

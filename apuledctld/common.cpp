@@ -86,11 +86,20 @@ void* led_thread(void* ptr)
 
 void sigproc(int sig)
 {
+    char* sn;
+
     switch(sig)
     {
 	case SIGHUP:
-	elog(1,"Received SIGHUP, reading scheme name from file...\n");
-	switch_scheme();
+	elog(1,"Received SIGHUP, reading blink scheme name from file...\n");
+	sn=get_scheme_from_file();
+	if(!sn)
+	{
+	    elog(1,"Can't get blink scheme from file\n");
+	    break;
+	}
+	else elog(1,"Switching to blink scheme '%s'\n",sn);
+	change_scheme(sn);
 	break;
 
 	case SIGTERM:
@@ -102,10 +111,13 @@ void sigproc(int sig)
 	break;
 
 	case SIGUSR1:
-
+	elog(1,"Received SIGUSR1, switching to blink scheme 'startup'\n");
+	change_scheme("startup");
 	break;
 
 	case SIGUSR2:
+	elog(1,"Received SIGUSR2, switching to blink scheme 'running'\n");
+	change_scheme("running");
 	break;
 
 	default:
