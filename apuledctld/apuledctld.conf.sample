@@ -2,4 +2,4 @@ blink:startup:1:300:2:300:4:300
 blink:running:5:-1
 blink:press:5:100:0:100
 
-action:5:/usr/local/etc/rc.reboot
+action:5:/usr/local/etc/rc.defaults -y
