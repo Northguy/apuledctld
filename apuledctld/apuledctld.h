@@ -21,8 +21,6 @@
 #define LED2_ON(bm) ((bm) & LED2)
 #define LED3_ON(bm) ((bm) & LED3)
 
-#define BTN_WAIT 5 //In seconds, wait time before run action when button pressed
-
 #define LOG_FILE "/var/log/apuledctld.log"
 #define CONF_FILE "/usr/local/etc/apuledctld.conf"
 #define SCHEME_FILE "/var/run/apuled-scheme"

@@ -44,7 +44,7 @@ _serr:
 	if(data!='0')
 	{
 	    //Button pressed
-	    if(bpt<BTN_WAIT)
+	    if(bpt<cf.btn_wait)
 	    {
 	        bpt++;
 	        elog(1,"Button press detected, timer: %d\n",bpt);
