@@ -23,3 +23,5 @@ clean:
 
 install:
 	cp -v $(PROG) $(DESTDIR)/usr/local/sbin
+	cp -v al_chscheme $(DESTDIR)/usr/local/sbin
+	cp -v $(PROG).conf.example $(DESTDIR)/usr/local/etc
