@@ -1,0 +1,16 @@
+#!/bin/sh
+
+if [ "$1" = "" ]; then
+    echo "Usage: $0 <blink scheme name>"
+    exit 1
+fi
+
+chk=$(ps ax | grep apuledctld | grep -v grep | wc -l)
+
+if [ ${chk} -ne "0" ]; then
+    echo "Switching to blink scheme '$1'..."
+    echo $1 > /var/run/apuled-scheme
+    killall -HUP apuledctld
+else
+    echo "apuledctld not running"
+fi
