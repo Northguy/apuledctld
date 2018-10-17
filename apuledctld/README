@@ -1,0 +1,71 @@
+The apuledctld daemon is designed to monitor of the button on front panel of PCEngines APU<x> devices.
+In addition, it can control the illumination of three LEDs on front panel according to the scheme
+given in configuration file.
+
+Daemon lights LEDs according to builtin "running" scheme when started without parameters and then
+tracks the front panel's button state. Long press a button for a period specified in configuration
+file will invoke command specified in configuration file.
+
+When started with '--startup' parameter, LEDs will be light up according builtin "startup" scheme
+and then as described above.
+
+During button pressing LEDs lights up according builtin scheme "press". If button released 
+before period expires, LEDs state returns to the previously used scheme.
+
+*** LEDs BLINKING SCHEMES ***
+
+Schemes can be of two types: permanent and cyclic. Permanent scheme lights up LEDs once according
+to the specified parameters, cyclic scheme lights up LEDs in the loop.
+
+Blinking scheme is specified in configuration file according to the following syntax:
+
+blink:<scheme name>:<bitmap>:<light time (ms)>[:<bitmap>:<light time (ms)>]...
+scheme name - any string up to 256 chars
+bitmap - integer where bits 0,1 and 2 indicates the state of LEDs 1,2 and 3 respectively
+    for example - 5 (LED 1 and 3 is on and LED 2 is off)
+light time - LED glow time (in milliseconds) according to the bitmap.
+
+
+If the scheme has only one pair "bitmap:light_time", such scheme is considered static and light_time 
+is ignored, a value of -1 must be assigned. If there are more than one pair, the scheme 
+is considered cyclic, and light_time value must be a positive integer. Number of pairs is limited 
+by maximal  line length of 1024 bytes.
+
+For example:
+blink:running:5:-1
+A static scheme, where LEDs 1 and 3 constantly on.
+
+blink:startup:1:300:2:300:4:300
+A cyclic scheme, where LEDs 1, 2 and 3 light subsequently with 300 ms. interval
+
+blink:press:5:100:0:100
+A cyclic scheme where LEDs 1 and 3  turn (go) on and off with 100 ms. interval.
+
+Number of schemes in config file is unlimited. Three schemes must be defined:
+'startup', 'running' and 'press'
+Other schemes can have arbitrary names.
+
+When the daemon is running, it is possible to switch schemes using signals:
+SIGUSR1: switching to the “startup” scheme
+SIGUSR2: switching to the “running” scheme
+SIGHUP: switching to the scheme specified in the text file /var/run/apuled-scheme
+For use of SIGHUP daemon is supplied with a shell-script 'al_chscheme'
+
+*** ACTION TO BE EXECUTED AFTER CLICKING THE BUTTON ***
+
+Action to be executed after clicking the button is specified in the configuration file according to the following syntax:
+following syntax: <button click time>:<command>
+Button click time - time in seconds
+Command - any command or script (full absolute path)
+
+If ‘startup’ scheme is active button click is ignored
+After executing the command specified in configuration the daemon finishes its work.
+When the button is pressed LEDs are activated according to the ‘press’ scheme, if the button press was 
+shorter than specified in configuration, LEDs’ activation returns to the scheme that was active during 
+the button pressing.
+
+Only one action can be specified, in case there are several of them, the last one will be active.
+
+For example:
+action:5:/usr/local/etc/rc.reboot
+After continuously pressing the button for 5 seconds /usr/local/etc/rc.reboot script will run
