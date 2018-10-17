@@ -1,7 +1,6 @@
 CC=c++
 CFLAGS=-s -O2 -Wno-write-strings
-CFLAGS=-g -Wall -Wextra -Werror -Wno-write-strings
-CDFLAGS=-g -Wall -Wextra -Werror -Wno-write-strings -D__DEBUG_
+CDFLAGS=-g -Wall -Wextra -Werror -Wno-write-strings
 PROG=apuledctld
 LIB=-lpthread
 OBJS=common.o log.o modesw.o conf.o led.o
